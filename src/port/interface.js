@@ -14,8 +14,8 @@ app.get('/api/gettable', (req, res) => {
     for(i=0;i<req.query.total;i++){
         let obj = {
             num:i,
-            name:"金振宗",
-            phone:"17695518131",
+            name:"xxxx",
+            phone:"xxxxxxx",
             year:"1995",
             month:"05",
             day:"10",
