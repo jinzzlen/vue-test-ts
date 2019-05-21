@@ -11,7 +11,7 @@ app.get('/api/gettable', (req, res) => {
      */
     let arr = [];
     
-    for(i=0;i<req.query.total;i++){
+    for(i=0;i<req.query.pageSize;i++){
         let obj = {
             num:i,
             name:"xxxx",
@@ -24,13 +24,14 @@ app.get('/api/gettable', (req, res) => {
         arr.push(obj);
     }
 
-
+    let total = 10000;
     res.json({ 
         code: 200,
         message: "查询表格成功",
         data:{
-            index:req.query.index,
-            total:arr.length,
+            index:Number(req.query.index),
+            total:total,
+            totalPage:Math.ceil(total/req.query.pageSize),
             rows:arr
         }
     })

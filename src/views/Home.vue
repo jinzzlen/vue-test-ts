@@ -29,12 +29,17 @@ export default class Home extends Vue {
       },
       pageOption:{
         index:1,
-        total:15,
+        pageSize:15,
         indexKey:"index",
-        totalKey:"total"
+        pageSizeKey:"pageSize"
       },
       dataHandle(data:any){
-        console.log(data);
+        // console.log(data);
+        return {
+          data:data.data.rows,
+          total:data.data.total,
+          index:data.data.index,
+        }
       }
 
   }
