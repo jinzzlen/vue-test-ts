@@ -14,6 +14,7 @@ import { Vue, Component,Prop, Provide,} from 'vue-property-decorator';
 import  tableHeader from "./tableHeader.vue";
 import  tableBody from "./tableBody.vue";
 import  tablePage from "./tablePage.vue";
+import Fetch from "../tool/fetch";
 interface tableOpt {
     getUrl:Function;
     pageOption:{
@@ -53,14 +54,12 @@ export default class jTable extends Vue{
             totalPage:0,
         }
     }
-    dd:number = 11
    mounted(){
        if(this.tableOpt.getUrl()){
-           
-          fetch(_publishurl + this.tableOpt.getUrl() + `?${this.tableOpt.pageOption.indexKey}=${this.state.tableInfo.index}&${this.tableOpt.pageOption.pageSizeKey}=${this.state.tableInfo.pageSize}`)
-            .then((response) => {
-                return response.json();
-            }).then((data) => {
+          Fetch.getFetch(_publishurl + this.tableOpt.getUrl(),{
+                [this.tableOpt.pageOption.indexKey]:this.state.tableInfo.index,
+                [this.tableOpt.pageOption.pageSizeKey]:this.state.tableInfo.pageSize
+          }).then((data:any) => {
                 let array = this.tableOpt.dataHandle(data);
                 tableRender(array,this);
             })
