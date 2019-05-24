@@ -22,14 +22,22 @@ app.get('/api/gettable', (req, res) => {
      * 数据库操作
      */
     dbFunc.queryPageData("nodetest",req.query.index,req.query.pageSize,(result)=>{
-        res.json({
-            code:200,
-            message:"success",
-            index:result.index,
-            rows:result.data,
-            total:result.count,
-            totalPage:result.totalPage
-        })
+        if(result.success){
+            res.json({
+                code:200,
+                message:"success",
+                index:result.index,
+                rows:result.data,
+                total:result.count,
+                totalPage:result.totalPage
+            })
+        }else{
+            res.json({
+                code:500,
+                errorMsg:result.errorMsg,
+            })
+        }
+        
         // client.close();
 
     });

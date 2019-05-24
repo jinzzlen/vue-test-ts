@@ -2,10 +2,10 @@
     <div>
        
         <table class = "j-table-box" cellspacing="0" cellpadding="0">
-            <table-header></table-header>
-            <table-body></table-body>
+            <table-header :titleMap = "state.titleMap"></table-header>
+            <table-body :data = "state.tableRows" :titleMap = "state.titleMap"></table-body>
         </table>
-        <table-page></table-page>
+        <table-page :page = "state.tableInfo"></table-page>
     </div>
 </template>
 <script lang="ts">
@@ -15,6 +15,9 @@ import  tableHeader from "./tableHeader.vue";
 import  tableBody from "./tableBody.vue";
 import  tablePage from "./tablePage.vue";
 import Fetch from "../tool/fetch";
+/**
+ * tableoptions interface
+ */
 interface tableOpt {
     getUrl:Function;
     pageOption:{
@@ -23,17 +26,24 @@ interface tableOpt {
         pageSizeKey:string;
         pageSize:number;
     };
-    dataHandle:Function
+    dataHandle:Function,
+    titleMap:number[],
+
 }
+/**
+ * tableArr interface
+ */
 interface tableArr {
-    data:Array<number>,
+    data:number[],
     total:number,
     index:number
+    totalPage:number,
 }
-function tableRender(data:tableArr,that: any):void{
-    console.log(data)
-    that.tableRows = data.data;
-    
+function settableData(data:tableArr,that: any):void{
+    that.state.tableRows = data.data;
+    that.state.tableInfo.total = data.total;
+    that.state.tableInfo.totalPage = data.totalPage;
+    that.state.tableInfo.index = data.index;
 }
 @Component({
    components:{
@@ -46,25 +56,38 @@ function tableRender(data:tableArr,that: any):void{
 
 export default class jTable extends Vue{
     @Prop() tableOpt !:tableOpt;
-    state = {
+     state = {
         tableInfo : {
             pageSize:this.tableOpt.pageOption.pageSize,
             index:this.tableOpt.pageOption.index,
-            count:0,
+            total:0,
             totalPage:0,
-        }
+        },
+        tableRows : [],
+        titleMap:this.tableOpt.titleMap,
     }
+    
    mounted(){
-       if(this.tableOpt.getUrl()){
+       this.renderTable();
+   }
+   renderTable(index?:number){
+       if(!index){
+           index = this.state.tableInfo.index
+       }
+        if(this.tableOpt.getUrl()){
           Fetch.getFetch(_publishurl + this.tableOpt.getUrl(),{
-                [this.tableOpt.pageOption.indexKey]:this.state.tableInfo.index,
+                [this.tableOpt.pageOption.indexKey]:index,
                 [this.tableOpt.pageOption.pageSizeKey]:this.state.tableInfo.pageSize
           }).then((data:any) => {
                 let array = this.tableOpt.dataHandle(data);
-                tableRender(array,this);
+                settableData(array,this);
+                console.log(this,111);
+            })
+            .catch(error => {
+                console.log(error,2222);
             })
        }
-   }
+    }
     
    
 }

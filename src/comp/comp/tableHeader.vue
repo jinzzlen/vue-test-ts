@@ -1,16 +1,22 @@
 <template>
         <thead class = "j-table-header">
             <tr>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
+                <th v-for = "(title,titleKey) in titleMap" :key = "titleKey">
+                        {{ title.name }}
+                </th>
+                
             </tr>
         </thead>
 </template>
 
-<script>
-export default {
 
+<script lang = "ts">
+import { Vue, Component,Prop, Provide,} from 'vue-property-decorator';
+@Component({
+
+})
+export default class jTableHeader extends Vue{
+    @Prop({default:[]}) titleMap!:number[];
 }
 </script>
 

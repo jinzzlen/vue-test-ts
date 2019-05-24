@@ -28,18 +28,57 @@ export default class Home extends Vue {
         return "/api/gettable"
       },
       pageOption:{
-        index:1,
-        pageSize:10,
+        index:1 ,
+        pageSize:1,
         indexKey:"index",
         pageSizeKey:"pageSize"
       },
       dataHandle(data:any){
         return {
           data:data.rows,
-          total:data.total,
           index:data.index,
+          total:data.total,
+          totalPage:data.totalPage,
         }
-      }
+      },
+      titleMap:[
+        {
+          name:"名字",
+          key:"name",
+        },
+        {
+          name:"年龄",
+          key:"age"
+        },
+        {
+          name:"手机号",
+          key:"phone"
+        },
+        {
+          name:"年份",
+          key:"year",
+        },
+        {
+          name:"月份",
+          key:"month",
+        },
+        {
+          name:"月份",
+          key:"month",
+        },
+        {
+          name:"日",
+          key:"day",
+        },
+        {
+          name:"t",
+          key:"t",
+        },
+        {
+          name:"z",
+          key:"z",
+        }
+      ]
 
   }
   mounted () {

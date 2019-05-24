@@ -1,20 +1,73 @@
 <template>
     <div class = "j-table-page">
+            {{page.index}}
             <ul class = "page-box">
-                <li class = "page-btn">1</li>
-                <li class = "page-btn">2</li>
-                <li class = "page-btn-ellipsis"> ... </li>
-                <li class="page-btn">8</li>
-                <li class="page-btn">9</li>
+                <template v-if = "page.totalPage<=8">
+                    
+                        <li class="page-btn"  
+                            v-for = "(index,key) in page.totalPage" 
+                            :class = "parseInt(page.index) == parseInt(index)?'current':'normal'"                            
+                            :key = "key">
+                            {{ index }}
+                            
+                        </li>
+                </template>
+                <template v-if = "page.totalPage > 8">
+                        <li class="page-btn"  
+                            v-for = "(index,key) in 2" 
+                            :class = "parseInt(page.index) == parseInt(index)?'current':'normal'"
+                            :key = "'table_footer_start' + key">
+                            {{ parseInt(index) }}
+                        </li>
+                        <li class = "page-btn-ellipsis" v-show = 'page.index > 3'> ... </li>
+                        <li class="page-btn normal"  
+                            v-if = "parseInt(page.index)-1>3 && parseInt(page.index)-1<= page.totalPage-2"
+                            >
+                            {{
+                                page.index-1
+                            }}
+                        </li>
+                        <li class="page-btn current"  
+                            v-if = "parseInt(page.index)>2 && parseInt(page.index)<= page.totalPage-2"
+                            >
+                            {{
+                                page.index
+                            }}
+                        </li>
+                     
+                        <li class="page-btn normal"  
+                            v-if = "parseInt(page.index)+1 <= page.totalPage-2 && parseInt(page.index)+1 > 2"
+                            >
+                            {{
+                                page.index+1
+                            }}
+                        </li>
+                        
+                        <li class = "page-btn-ellipsis" v-show = 'parseInt(page.totalPage -3) > parseInt(page.index)'> ... </li>
+                        <li class="page-btn"  
+                            v-for = "(index,key) in [1,0]" 
+                            :class = "parseInt(page.totalPage) - parseInt(index) == page.index?'current':'normal'"
+                            :key = "'table_footer_last' + key">
+                            {{ parseInt(page.totalPage) - parseInt(index) }}
+                        </li>
+                </template>
+                
+                
             </ul>
     </div>
 </template>
 
-<script>
-export default {
+<script lang = "ts">
+import { Vue, Component,Prop} from 'vue-property-decorator';
+@Component({
 
+})
+export default class jTablePage extends Vue{
+    @Prop({default:[]}) page!:number[];
 }
 </script>
+
+
 
 <style scoped>
      .j-table-page{
@@ -33,6 +86,7 @@ export default {
         margin-left: 10px;
         margin-right: 10px;
         vertical-align: top;
+        cursor:pointer;
     }
     .j-table-page .page-box .page-btn{
         width:30px;
@@ -48,5 +102,9 @@ export default {
     .j-table-page .page-box .page-btn:hover{
         background:#e5e5e5;
         cursor:pointer;
+    }
+    .page-btn.current{
+        background:rgb(141, 141, 240)!important;
+        color:#fff;
     }
 </style>

@@ -65,7 +65,6 @@ queryPageData = (dbname,page,rowcount,cb) => {
 
     MongoClient.connect(DB_URL, { useNewUrlParser: true }, function(error, client){
         var devices = client.db('mongoTest').collection(dbname);
-      
         var _num = rowcount;//每页几条
         var _total = 0;
         var _skip = (page-1) * _num;//获取数据
@@ -75,12 +74,24 @@ queryPageData = (dbname,page,rowcount,cb) => {
                 console.log(_skip);
                 let rel = devices.find().limit(_num).skip(_skip)
                 rel.toArray((error,result) => {
-                    cb({
-                        index:page,
-                        totalPage:Math.ceil(_total/_num),
-                        data:result,
-                        count:_total,
-                    })
+                    if(!error){
+                        cb({
+                            success:true,
+                            index:page,
+                            totalPage:Math.ceil(_total/_num),
+                            data:result,
+                            count:_total,
+                        })
+                        client.close();
+
+                    }else{
+                        cb({
+                            success:false,
+                            errorMsg:error
+                        })
+                        client.close();
+                    }
+                    
                 })
                 
             }
