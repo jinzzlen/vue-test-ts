@@ -14,7 +14,8 @@ let _active = {
         return result.substring(1)
     }
 }
-
+// var _publishurl:string = "http://10.112.7.77:3000"
+var _publishurl:string = "http://192.168.1.108:3000"
 const getFetch = (url:string,params?:any)=> {
     return new Promise ((resolve,reject) => {
         let headers = {
@@ -25,7 +26,7 @@ const getFetch = (url:string,params?:any)=> {
             origin:"http://10.112.7.77:8081",
             headers:headers
         }
-        fetch(url + "?" + _active.jsonToString(params),_opt)
+        fetch(_publishurl + url + "?" + _active.jsonToString(params),_opt)
             .then((response) => {
                 return response.json();
             })

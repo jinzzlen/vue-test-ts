@@ -1,13 +1,13 @@
 <template>
     <div class = "j-table-page">
-            {{page.index}}
             <ul class = "page-box">
                 <template v-if = "page.totalPage<=8">
                     
                         <li class="page-btn"  
                             v-for = "(index,key) in page.totalPage" 
                             :class = "parseInt(page.index) == parseInt(index)?'current':'normal'"                            
-                            :key = "key">
+                            :key = "key"
+                            @click = "getPage(index)">
                             {{ index }}
                             
                         </li>
@@ -16,20 +16,26 @@
                         <li class="page-btn"  
                             v-for = "(index,key) in 2" 
                             :class = "parseInt(page.index) == parseInt(index)?'current':'normal'"
-                            :key = "'table_footer_start' + key">
+                            :key = "'table_footer_start' + key"
+                            @click = "getPage(index)">
                             {{ parseInt(index) }}
                         </li>
-                        <li class = "page-btn-ellipsis" v-show = 'page.index > 3'> ... </li>
+                        
+                        <li class = "page-btn-ellipsis" 
+                            v-show = 'page.index > 3'
+                            v-hover = "'<'"
+                            @click = "prePages(page.index-3)"> ... </li>
+
                         <li class="page-btn normal"  
                             v-if = "parseInt(page.index)-1>3 && parseInt(page.index)-1<= page.totalPage-2"
-                            >
+                            @click = "getPage(page.index-1)">
                             {{
                                 page.index-1
                             }}
                         </li>
                         <li class="page-btn current"  
                             v-if = "parseInt(page.index)>2 && parseInt(page.index)<= page.totalPage-2"
-                            >
+                            @click = "getPage(page.index)">
                             {{
                                 page.index
                             }}
@@ -37,17 +43,22 @@
                      
                         <li class="page-btn normal"  
                             v-if = "parseInt(page.index)+1 <= page.totalPage-2 && parseInt(page.index)+1 > 2"
-                            >
+                            @click = "getPage(page.index+1)">
                             {{
                                 page.index+1
                             }}
                         </li>
                         
-                        <li class = "page-btn-ellipsis" v-show = 'parseInt(page.totalPage -3) > parseInt(page.index)'> ... </li>
+                        <li class = "page-btn-ellipsis" 
+                            v-show = 'parseInt(page.totalPage -3) > parseInt(page.index)'
+                            v-hover = "'>'"
+                            @click = "nextPages(page.index+3)"> ... </li>
+                        
                         <li class="page-btn"  
                             v-for = "(index,key) in [1,0]" 
                             :class = "parseInt(page.totalPage) - parseInt(index) == page.index?'current':'normal'"
-                            :key = "'table_footer_last' + key">
+                            :key = "'table_footer_last' + key"
+                            @click = "getPage(page.totalPage - index)">
                             {{ parseInt(page.totalPage) - parseInt(index) }}
                         </li>
                 </template>
@@ -58,13 +69,26 @@
 </template>
 
 <script lang = "ts">
+
 import { Vue, Component,Prop} from 'vue-property-decorator';
 @Component({
 
 })
 export default class jTablePage extends Vue{
     @Prop({default:[]}) page!:number[];
-}
+    @Prop({}) pkey!:number[];
+
+    myThis:any = this;
+    nextPages(page:number):void{
+        this.$_event.$emit(this.pkey + "TABLEEVENT","nextPage",page);
+    }
+    prePages(page:number):void{
+        this.$_event.$emit(this.pkey + "TABLEEVENT","prePage",page);
+    }
+    getPage(page:number):void{
+        this.$_event.$emit(this.pkey + "TABLEEVENT","appointPage",page);
+    }
+}   
 </script>
 
 

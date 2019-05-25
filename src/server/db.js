@@ -59,11 +59,10 @@ const selectAllData = (dbname,cb) => {
 queryPageData = (dbname,page,rowcount,cb) => {
     page = parseInt(page);
     rowcount = parseInt(rowcount);
-    console.log(dbname)
-    console.log(page)
-    console.log(rowcount)
+    console.log(1);
 
     MongoClient.connect(DB_URL, { useNewUrlParser: true }, function(error, client){
+        console.log("数据库打开");
         var devices = client.db('mongoTest').collection(dbname);
         var _num = rowcount;//每页几条
         var _total = 0;
@@ -87,13 +86,18 @@ queryPageData = (dbname,page,rowcount,cb) => {
                     }else{
                         cb({
                             success:false,
-                            errorMsg:error
+                            errorMsg:"查询数据出错：" + error
                         })
                         client.close();
                     }
                     
                 })
                 
+            }else{
+                cb({
+                    success:false,
+                    errorMsg:"数据库连接失败" + error
+                })
             }
         })
         

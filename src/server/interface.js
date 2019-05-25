@@ -6,7 +6,7 @@ const app = express();
     //导入cors模块,该模块为跨域所用
 const cors = require('cors');
 app.use(cors({
-    origin: ['http://10.112.7.77:8080'],
+    origin: ['http://10.112.7.77:8080',"http://192.168.1.108:8080"],
     optionsSuccessStatus: 200 
 }));
 const bodyParser = require('body-parser');
@@ -21,7 +21,9 @@ app.get('/api/gettable', (req, res) => {
     /**
      * 数据库操作
      */
+    console.log("接口访问成功");
     dbFunc.queryPageData("nodetest",req.query.index,req.query.pageSize,(result)=>{
+        console.log(result)
         if(result.success){
             res.json({
                 code:200,
@@ -45,7 +47,7 @@ app.get('/api/gettable', (req, res) => {
 })
 app.get("/",(req,res)=>{
     res.setHeader('Content-Type', 'text/plain;charset=utf-8');
-    res.end("port文件已启动")
+    res.end("node服务已启动")
 })
 
 app.listen(3000, () => {

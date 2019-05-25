@@ -1,34 +1,44 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld :msg="1111"/>
-    <j-table  :ccc = "obj" :tableOpt = "tableOpt"></j-table>
+    <button @click = "getCurrent">获取当前页码</button>
+    <button @click = "getCurrentData">获取当前页数据</button>
+    <j-table ref = "jtable"  :tableOpt = "tableOpt"></j-table>
+    <j-table ref = "jtable1"  :tableOpt = "tableOpt"></j-table>
+    <j-table ref = "jtable2"  :tableOpt = "tableOpt"></j-table>
+
+
    
   </div> 
 </template>
 
 <script lang="ts">
+
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-import jTable from '../comp/comp/table.vue';//table
+import jTable from '../comp/comp/table/table.vue';//table
+// import jButton from "../comp/comp/button/button.vue";//button
 @Component({
   components: {
     HelloWorld,
     jTable
   },
 })
+
 export default class Home extends Vue {
-  msg:string="111";
   obj:object = {
     a:"1213131",
     b:234
+  }
+  public $refs!: {
+    jtable: jTable
   }
   tableOpt:object = {
       getUrl:function(){
         return "/api/gettable"
       },
       pageOption:{
-        index:1 ,
+        index:5 ,
         pageSize:1,
         indexKey:"index",
         pageSizeKey:"pageSize"
@@ -84,11 +94,14 @@ export default class Home extends Vue {
   mounted () {
     this.greet();
   }
-  get computedMsg(){
-    return "computed" + this.msg
-  }
   greet () {
     // alert('greeting: ' + this.msg)
+  }
+  getCurrent(){
+    console.log(this.$refs.jtable.getCurrentPage())
+  }
+  getCurrentData(){
+    console.log(this.$refs['jtable'].getCurrentPageData())
   }
 }
 </script>
