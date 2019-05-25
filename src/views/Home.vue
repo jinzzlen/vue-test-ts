@@ -6,6 +6,96 @@
     <j-table ref = "jtable"  :tableOpt = "tableOpt"></j-table>
     <j-table ref = "jtable1"  :tableOpt = "tableOpt"></j-table>
     <j-table ref = "jtable2"  :tableOpt = "tableOpt"></j-table>
+    <j-button inline >
+        确定
+    </j-button>
+<j-button inline circle threed @click = "ccc">
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+<j-button inline type = "primary" circle threed @click = "ddd">
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+<j-button inline type = "success" threed style = "">
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+
+
+    
+    <j-button inline type = "warning" threed>
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+    <j-button inline type = "danger" threed>
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+    <j-button inline type = "info" threed>
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+    <j-button inline type = "remind" threed>
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+
+
+
+
+  <div style = "margin-top :30px"></div>
+    <j-button inline text>
+        确定
+    </j-button>
+<j-button inline circle threed text>
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+<j-button inline type = "primary" circle threed text>
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+<j-button inline type = "success" threed style = "" text>
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+
+
+    
+    <j-button inline type = "warning" threed text>
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+    <j-button inline type = "danger" threed text>
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+    <j-button inline type = "info" threed text>
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+    <j-button inline type = "remind" threed text>
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+
+
+
+  <div style = "margin-top :30px"></div>
+    <j-button inline >
+        确定
+    </j-button>
+<j-button inline circle  >
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+<j-button inline type = "primary" circle  >
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+<j-button inline type = "success"  style = "" >
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+
+
+    
+    <j-button inline type = "warning"  >
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+    <j-button inline type = "danger"  >
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+    <j-button inline type = "info"  >
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
+    <j-button inline type = "remind"  >
+        确定dasdasdasdasdasdadas发撒打算的
+    </j-button>
 
 
    
@@ -17,11 +107,12 @@
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import jTable from '../comp/comp/table/table.vue';//table
-// import jButton from "../comp/comp/button/button.vue";//button
+import jButton from "../comp/comp/button/button.vue";//button
 @Component({
   components: {
     HelloWorld,
-    jTable
+    jTable,
+    jButton
   },
 })
 
@@ -102,6 +193,12 @@ export default class Home extends Vue {
   }
   getCurrentData(){
     console.log(this.$refs['jtable'].getCurrentPageData())
+  }
+  ccc(){
+    console.log("ccc");
+  }
+  ddd(){
+    console.log("ddd");
   }
 }
 </script>
