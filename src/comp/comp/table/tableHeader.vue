@@ -1,6 +1,7 @@
 <template>
         <thead class = "j-table-header">
             <tr>
+                <th v-if = "actions.length > 0">操作</th>
                 <th v-for = "(title,titleKey) in titleMap" :key = "titleKey">
                         {{ title.name }}
                 </th>
@@ -17,6 +18,7 @@ import { Vue, Component,Prop, Provide,} from 'vue-property-decorator';
 })
 export default class jTableHeader extends Vue{
     @Prop({default:[]}) titleMap ?: number[];
+    @Prop({default:[],type:Array}) actions ?:number[];
 }
 </script>
 

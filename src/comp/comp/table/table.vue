@@ -2,8 +2,8 @@
     <div>
        {{this.$data.__key}}
         <table class = "j-table-box" cellspacing="0" cellpadding="0">
-            <table-header :titleMap = "state.titleMap"></table-header>
-            <table-body :data = "state.tableRows" :titleMap = "state.titleMap"></table-body>
+            <table-header :titleMap = "state.titleMap" :actions = "state.actions"></table-header>
+            <table-body :data = "state.tableRows" :titleMap = "state.titleMap" :actions = "state.actions"></table-body>
         </table>
         <table-page :page = "state.tableInfo" :pkey = "$data.__key"></table-page>
     </div>
@@ -22,6 +22,8 @@ interface tableOpt {
     };
     dataHandle:Function,
     titleMap:number[],
+    actions:number[],
+
 
 }
 /**
@@ -66,6 +68,7 @@ export default class jTable extends Vue{
             total:0,
             totalPage:0,
         },
+        actions:this.tableOpt.actions ? this.tableOpt.actions : [],
         tableRows : [],
         titleMap:this.tableOpt.titleMap,
     }

@@ -19,7 +19,7 @@
     @Component({})
     export default class jButton extends Vue {
         @Prop() type ?:string;
-        @Prop({default:true,type:Boolean}) inline ?: boolean;
+        @Prop({default:false,type:Boolean}) inline ?: boolean;
         @Prop({default:false,type:Boolean}) text ?: boolean;
         @Prop({default:false,type:Boolean}) circle ?: boolean;
         @Prop({default:false,type:Boolean}) threed ?: boolean;

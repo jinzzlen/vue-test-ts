@@ -69,31 +69,31 @@
 
 
   <div style = "margin-top :30px"></div>
-    <j-button inline >
+    <j-button  >
         确定
     </j-button>
-<j-button inline circle  >
+<j-button  circle  >
         确定dasdasdasdasdasdadas发撒打算的
     </j-button>
-<j-button inline type = "primary" circle  >
+<j-button  type = "primary" circle  >
         确定dasdasdasdasdasdadas发撒打算的
     </j-button>
-<j-button inline type = "success"  style = "" >
+<j-button  type = "success"  style = "" >
         确定dasdasdasdasdasdadas发撒打算的
     </j-button>
 
 
     
-    <j-button inline type = "warning"  >
+    <j-button  type = "warning"  >
         确定dasdasdasdasdasdadas发撒打算的
     </j-button>
-    <j-button inline type = "danger"  >
+    <j-button  type = "danger"  >
         确定dasdasdasdasdasdadas发撒打算的
     </j-button>
-    <j-button inline type = "info"  >
+    <j-button  type = "info"  >
         确定dasdasdasdasdasdadas发撒打算的
     </j-button>
-    <j-button inline type = "remind"  >
+    <j-button  type = "remind"  >
         确定dasdasdasdasdasdadas发撒打算的
     </j-button>
 
@@ -179,6 +179,29 @@ export default class Home extends Vue {
           name:"z",
           key:"z",
         }
+      ],
+      actions:[
+        {
+          val:"操作1",
+          callback:this.ccc,
+          type:"primary",
+          threed : false,
+          text:false,
+        },
+        {
+          val:"操作2",
+          callback:this.ddd,
+          type:"primary",
+          threed : true,
+          text:false,
+        },
+        {
+          val:"操作3",
+          callback:this.ddd,
+          type:"warning",
+          threed : true,
+          text:true,
+        }
       ]
 
   }
@@ -194,8 +217,8 @@ export default class Home extends Vue {
   getCurrentData(){
     console.log(this.$refs['jtable'].getCurrentPageData())
   }
-  ccc(){
-    console.log("ccc");
+  ccc(row){
+    console.log(row);
   }
   ddd(){
     console.log("ddd");
