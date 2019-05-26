@@ -15,8 +15,8 @@ import { Vue, Component,Prop, Provide,} from 'vue-property-decorator';
 
 })
 export default class jTableBody extends Vue{
-    @Prop({default:[]}) data!:number[];
-    @Prop({default:[]}) titleMap!:number[];
+    @Prop({default:[]}) data ?:number[];
+    @Prop({default:[]}) titleMap ?:number[];
 }
 </script>
 <style scoped>

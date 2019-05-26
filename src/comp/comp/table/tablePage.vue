@@ -75,8 +75,8 @@ import { Vue, Component,Prop} from 'vue-property-decorator';
 
 })
 export default class jTablePage extends Vue{
-    @Prop({default:[]}) page!:number[];
-    @Prop({}) pkey!:number[];
+    @Prop({default:[]}) page?:number[];
+    @Prop({}) pkey?:number[];
 
     myThis:any = this;
     nextPages(page:number):void{

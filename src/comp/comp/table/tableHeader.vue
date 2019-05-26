@@ -16,7 +16,7 @@ import { Vue, Component,Prop, Provide,} from 'vue-property-decorator';
 
 })
 export default class jTableHeader extends Vue{
-    @Prop({default:[]}) titleMap!:number[];
+    @Prop({default:[]}) titleMap ?: number[];
 }
 </script>
 
